@@ -1,8 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -10,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\OlxNotifier.Scraper\OlxNotifier.Scraper.csproj" />
+    <ProjectReference Include="..\OlxNotifier.Domain\OlxNotifier.Domain.csproj" />
   </ItemGroup>
 
 </Project>

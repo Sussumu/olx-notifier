@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.29728.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OlxNotifier", "OlxNotifier\OlxNotifier.csproj", "{6BA06C38-DA54-42CC-A75E-3A8553F9B12A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OlxNotifier.Scraper", "OlxNotifier.Scraper\OlxNotifier.Scraper.csproj", "{F527F33C-8F9F-4569-B9E7-AECC47728732}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OlxNotifier.Domain", "OlxNotifier.Domain\OlxNotifier.Domain.csproj", "{B1B34F4B-C1FF-4D92-AC15-56D77C93F952}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{6BA06C38-DA54-42CC-A75E-3A8553F9B12A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6BA06C38-DA54-42CC-A75E-3A8553F9B12A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6BA06C38-DA54-42CC-A75E-3A8553F9B12A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F527F33C-8F9F-4569-B9E7-AECC47728732}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F527F33C-8F9F-4569-B9E7-AECC47728732}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F527F33C-8F9F-4569-B9E7-AECC47728732}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F527F33C-8F9F-4569-B9E7-AECC47728732}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1B34F4B-C1FF-4D92-AC15-56D77C93F952}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1B34F4B-C1FF-4D92-AC15-56D77C93F952}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1B34F4B-C1FF-4D92-AC15-56D77C93F952}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1B34F4B-C1FF-4D92-AC15-56D77C93F952}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
