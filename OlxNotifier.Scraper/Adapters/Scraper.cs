@@ -10,6 +10,10 @@ namespace OlxNotifier.Scraper.Adapters
 {
     public class Scraper : IScraper
     {
+        // TODO: move url to configuration
+        // TODO: move tag to query entries to configuration
+        // TODO: handle connection errors
+        // TODO: handle parsing errors
         public async Task<List<Entry>> GetEntries()
         {
             var config = Configuration.Default.WithDefaultLoader();
