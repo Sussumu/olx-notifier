@@ -30,12 +30,12 @@ namespace OlxNotifier.Scraper.Adapters
 
             var document = await context.OpenAsync(address);
 
-            var cellSelector = "li.sc-1fcmfeb-2.ggOGTJ";
+            var cellSelector = Config.EntriesClassName;
             var cells = document.QuerySelectorAll(cellSelector);
 
-            var titleRegex = new Regex("[^R$]*");
-            var priceRegex = new Regex(@"(R\$ \d*\.?\d+)");
-            var dateRegex = new Regex(@"([a-zA-Z]+)(\d+:\d+)");
+            var titleRegex = new Regex(Config.TitleRegex);
+            var priceRegex = new Regex(Config.PriceRegex);
+            var dateRegex = new Regex(Config.DateRegex);
 
             return cells
                 .Where(x => x.TextContent.Length > 0)
