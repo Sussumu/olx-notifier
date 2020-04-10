@@ -1,4 +1,5 @@
 ﻿using AngleSharp;
+using OlxNotifier.Domain.Configurations;
 using OlxNotifier.Domain.Models;
 using OlxNotifier.Domain.Ports;
 using System.Collections.Generic;
@@ -8,16 +9,23 @@ using System.Threading.Tasks;
 
 namespace OlxNotifier.Scraper.Adapters
 {
+    // TODO: move url to configuration
+    // TODO: move tag to query entries to configuration
+    // TODO: handle connection errors
+    // TODO: handle parsing errors
     public class Scraper : IScraper
     {
-        // TODO: move url to configuration
-        // TODO: move tag to query entries to configuration
-        // TODO: handle connection errors
-        // TODO: handle parsing errors
+        public OlxConfiguration Config { get; }
+
+        public Scraper(OlxConfiguration config)
+        {
+            Config = config ?? throw new System.ArgumentNullException(nameof(config));
+        }
+
         public async Task<List<Entry>> GetEntries()
         {
             var config = Configuration.Default.WithDefaultLoader();
-            var address = "https://sp.olx.com.br/sao-paulo-e-regiao?q=nintendo%20switch&sf=1";
+            var address = Config.Url;
             var context = BrowsingContext.New(config);
 
             var document = await context.OpenAsync(address);
