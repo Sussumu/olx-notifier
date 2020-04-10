@@ -7,7 +7,7 @@ using Microsoft.OpenApi.Models;
 
 namespace OlxNotifier.TelegramBot
 {
-    public class Startup
+    public partial class Startup
     {
         public Startup(IConfiguration configuration)
         {
@@ -18,6 +18,8 @@ namespace OlxNotifier.TelegramBot
 
         public void ConfigureServices(IServiceCollection services)
         {
+            ConfigureDependecyInjection(services);
+
             services.AddControllers();
 
             services.AddSwaggerGen(c =>

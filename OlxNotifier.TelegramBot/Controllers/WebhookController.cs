@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Net.Http;
+using OlxNotifier.TelegramBot.Clients;
+using OlxNotifier.TelegramBot.Contracts;
+using System;
+using System.Threading.Tasks;
 
 namespace OlxNotifier.TelegramBot.Controllers
 {
@@ -7,20 +10,20 @@ namespace OlxNotifier.TelegramBot.Controllers
     [Route("webhook")]
     public class WebhookController : ControllerBase
     {
-        public HttpClient Client { get; }
+        public TelegramClient Client { get; }
 
-        public WebhookController(HttpClient client)
+        public WebhookController(TelegramClient client)
         {
-            Client = client ?? throw new System.ArgumentNullException(nameof(client));
+            Client = client ?? throw new ArgumentNullException(nameof(client));
         }
 
         [HttpPut]
         [Route("")]
-        public IActionResult Set([FromBody]string url)
+        public async Task<IActionResult> Set([FromBody]SetWebhookRequest request)
         {
+            var response = await Client.SetWebhook(request);
 
-
-            return Ok();
+            return Ok(response);
         }
     }
 }
