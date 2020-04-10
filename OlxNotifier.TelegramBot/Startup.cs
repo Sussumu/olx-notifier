@@ -20,7 +20,7 @@ namespace OlxNotifier.TelegramBot
         {
             ConfigureDependecyInjection(services);
 
-            services.AddControllers();
+            services.AddControllers()
 
             services.AddSwaggerGen(c =>
             {
