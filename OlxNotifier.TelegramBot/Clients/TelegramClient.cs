@@ -1,9 +1,8 @@
 ﻿using OlxNotifier.TelegramBot.Configurations;
 using OlxNotifier.TelegramBot.Contracts;
+using OlxNotifier.TelegramBot.Extensions;
 using System;
 using System.Net.Http;
-using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace OlxNotifier.TelegramBot.Clients
@@ -23,23 +22,9 @@ namespace OlxNotifier.TelegramBot.Clients
 
         public async Task<TelegramResult> SetWebhook(SetWebhookRequest request)
         {
-            var serializedRequest = JsonSerializer.Serialize(request);
-
-            var response = await Client.SendAsync(new HttpRequestMessage
-            {
-                Method = HttpMethod.Post,
-                RequestUri = new Uri($"{Config.TelegramApiUrl}setWebhook"),
-                Content = new StringContent(serializedRequest, Encoding.UTF8, "application/json")
-            });
-
-            response.EnsureSuccessStatusCode();
-
-            return JsonSerializer.Deserialize<TelegramResult>(
-                await response.Content.ReadAsStringAsync(),
-                new JsonSerializerOptions()
-                {
-                    PropertyNameCaseInsensitive = true
-                });
+            return await Client.CustomPost<TelegramResult>(
+                $"{Config.TelegramApiUrl}setWebhook",
+                request);
         }
     }
 }
