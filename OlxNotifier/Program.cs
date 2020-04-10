@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using OlxNotifier.Console.Services;
 using OlxNotifier.Domain.Configurations;
 using OlxNotifier.Domain.Ports;
+using OlxNotifier.Scraper.Adapters;
 using System.Threading.Tasks;
 
 namespace OlxNotifier
@@ -30,7 +31,9 @@ namespace OlxNotifier
             serviceCollection.AddSingleton(olxConfig);
 
             serviceCollection.AddTransient<IProcessor, Processor>();
+
             serviceCollection.AddTransient<IScraper, Scraper.Adapters.Scraper>();
+            serviceCollection.Decorate<IScraper, ScraperWithRetry>();
 
             return serviceCollection.BuildServiceProvider();
         }

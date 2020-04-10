@@ -9,10 +9,6 @@ using System.Threading.Tasks;
 
 namespace OlxNotifier.Scraper.Adapters
 {
-    // TODO: move url to configuration
-    // TODO: move tag to query entries to configuration
-    // TODO: handle connection errors
-    // TODO: handle parsing errors
     public class Scraper : IScraper
     {
         public OlxConfiguration Config { get; }
