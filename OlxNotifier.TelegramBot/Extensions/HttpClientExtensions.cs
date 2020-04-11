@@ -24,8 +24,6 @@ namespace OlxNotifier.TelegramBot.Extensions
                 Content = new StringContent(serializedRequest, Encoding.UTF8, "application/json")
             });
 
-            response.EnsureSuccessStatusCode();
-
             var content = await response.Content.ReadAsStringAsync();
 
             var result = JsonSerializer.Deserialize<T>(content,

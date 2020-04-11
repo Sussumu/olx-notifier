@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using OlxNotifier.TelegramBot.Middlewares;
 
 namespace OlxNotifier.TelegramBot
 {
@@ -40,6 +41,8 @@ namespace OlxNotifier.TelegramBot
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseMiddleware<WebhookMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {

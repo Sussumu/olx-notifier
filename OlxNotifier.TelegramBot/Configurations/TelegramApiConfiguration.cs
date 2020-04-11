@@ -17,5 +17,19 @@ namespace OlxNotifier.TelegramBot.Configurations
                 telegramApiUrl = value;
             }
         }
+
+        private string webhookUrl;
+
+        public string WebhookUrl
+        {
+            get => webhookUrl;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                    throw new ArgumentException("Webhook Url cannot be empty!");
+
+                webhookUrl = value;
+            }
+        }
     }
 }
