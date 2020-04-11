@@ -26,5 +26,12 @@ namespace OlxNotifier.TelegramBot.Clients
                 $"{Config.TelegramApiUrl}setWebhook",
                 request);
         }
+
+        public async Task<TelegramResult> SendMessage(MessageRequest request)
+        {
+            return await Client.CustomPost<TelegramResult>(
+                $"{Config.TelegramApiUrl}sendMessage",
+                request);
+        }
     }
 }

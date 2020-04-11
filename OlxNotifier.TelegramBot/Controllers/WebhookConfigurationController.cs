@@ -22,9 +22,7 @@ namespace OlxNotifier.TelegramBot.Controllers
         [Route("")]
         public async Task<TelegramResult> Set([FromBody]SetWebhookRequest request)
         {
-            var response = await Client.SetWebhook(request);
-
-            return response;
+            return await Client.SetWebhook(request);
         }
     }
 }
