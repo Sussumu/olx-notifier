@@ -2,7 +2,7 @@
 
 namespace OlxNotifier.TelegramBot.Contracts
 {
-    public class TelegramUpdateUser
+    public class TelegramUser
     {
         public int Id { get; set; }
 

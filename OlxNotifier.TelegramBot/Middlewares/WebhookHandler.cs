@@ -5,7 +5,7 @@ namespace OlxNotifier.TelegramBot.Middlewares
 {
     public class WebhookHandler : IWebhookHandler
     {
-        public Task Process(TelegramUpdateRequest request)
+        public Task Process(TelegramRequest request)
         {
             // Log
 

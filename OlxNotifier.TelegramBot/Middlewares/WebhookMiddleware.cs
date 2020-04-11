@@ -49,7 +49,7 @@ namespace OlxNotifier.TelegramBot.Middlewares
             await context.Request.Body.ReadAsync(body);
 
             var bodyAsString = Encoding.UTF8.GetString(body);
-            var parsedBody = JsonSerializer.Deserialize<TelegramUpdateRequest>(
+            var parsedBody = JsonSerializer.Deserialize<TelegramRequest>(
                 bodyAsString,
                 new JsonSerializerOptions
                 {

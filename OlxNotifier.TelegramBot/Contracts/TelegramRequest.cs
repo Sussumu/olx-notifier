@@ -2,11 +2,11 @@
 
 namespace OlxNotifier.TelegramBot.Contracts
 {
-    public class TelegramUpdateRequest
+    public class TelegramRequest
     {
         [JsonPropertyName("update_id")]
         public int Id { get; set; }
 
-        public TelegramUpdateMessage Message { get; set; }
+        public TelegramMessage Message { get; set; }
     }
 }
