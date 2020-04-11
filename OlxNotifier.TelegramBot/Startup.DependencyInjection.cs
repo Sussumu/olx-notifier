@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using OlxNotifier.TelegramBot.Clients;
 using OlxNotifier.TelegramBot.Configurations;
+using OlxNotifier.TelegramBot.Middlewares;
 
 namespace OlxNotifier.TelegramBot
 {
@@ -14,6 +15,8 @@ namespace OlxNotifier.TelegramBot
             services.AddSingleton(telegramConfig);
 
             services.AddHttpClient<TelegramClient>();
+
+            services.AddTransient<IWebhookHandler, WebhookHandler>();
         }
     }
 }

@@ -17,13 +17,16 @@ namespace OlxNotifier.TelegramBot.Middlewares
     {
         public RequestDelegate Next { get; }
         public TelegramApiConfiguration Config { get; }
+        public IWebhookHandler WebhookHandler { get; }
 
         public WebhookMiddleware(
             RequestDelegate next,
-            TelegramApiConfiguration config)
+            TelegramApiConfiguration config,
+            IWebhookHandler webhookHandler)
         {
             Next = next ?? throw new System.ArgumentNullException(nameof(next));
             Config = config ?? throw new System.ArgumentNullException(nameof(config));
+            WebhookHandler = webhookHandler;
         }
 
         public async Task InvokeAsync(HttpContext context)
@@ -52,6 +55,8 @@ namespace OlxNotifier.TelegramBot.Middlewares
                 {
                     PropertyNameCaseInsensitive = true
                 });
+
+            await WebhookHandler.Process(parsedBody);
 
             context.Response.StatusCode = (int)HttpStatusCode.OK;
             return;

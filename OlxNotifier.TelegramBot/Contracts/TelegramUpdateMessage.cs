@@ -1,4 +1,6 @@
-﻿using System.Text.Json.Serialization;
+﻿using System;
+using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace OlxNotifier.TelegramBot.Contracts
 {
@@ -14,5 +16,12 @@ namespace OlxNotifier.TelegramBot.Contracts
         public int UnixDate { get; set; }
 
         public string Text { get; set; }
+
+        public List<TelegramUpdateEntities> Entities { get; }
+
+        public DateTime DateTimeUtc
+        {
+            get => DateTimeOffset.FromUnixTimeSeconds(UnixDate).DateTime;
+        }
     }
 }
