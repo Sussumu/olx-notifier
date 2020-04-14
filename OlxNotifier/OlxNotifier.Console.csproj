@@ -17,11 +17,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\OlxNotifier.Scraper\OlxNotifier.Scraper.csproj" />
+    <ProjectReference Include="..\OlxNotifier.TelegramBot\OlxNotifier.TelegramBot.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <None Update="appsettings.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 

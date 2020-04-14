@@ -340,4 +340,5 @@ ASALocalRun/
 healthchecksdb
 
 # Development environment variables
+appsettings.json
 appsettings.development.json
