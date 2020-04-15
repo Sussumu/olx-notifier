@@ -32,16 +32,17 @@ namespace OlxNotifier.Scraper.Adapters
             var titleRegex = new Regex(Config.TitleRegex);
             var priceRegex = new Regex(Config.PriceRegex);
             var dateRegex = new Regex(Config.DateRegex);
+            var urlRegex = new Regex(Config.UrlRegex);
 
             return cells
                 .Where(x => x.TextContent.Length > 0)
-                .Select(x => x.TextContent.Substring(1, x.TextContent.Length - 1))
                 .Select(x => new Entry
                 {
-                    Title = titleRegex.Match(x).Value,
-                    Price = priceRegex.Match(x).Value,
-                    Date = dateRegex.Match(x).Groups[1].Value,
-                    Time = dateRegex.Match(x).Groups[2].Value,
+                    Title = titleRegex.Match(x.TextContent).Value.Substring(1, x.TextContent.Length - 1),
+                    Price = priceRegex.Match(x.TextContent).Value,
+                    Date = dateRegex.Match(x.TextContent).Groups[1].Value,
+                    Time = dateRegex.Match(x.TextContent).Groups[2].Value,
+                    Url = urlRegex.Match(x.InnerHtml).Groups[0].Value
                 })
                 .ToList();
         }

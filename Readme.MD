@@ -14,7 +14,7 @@ I just a cheap Switch.
 
 ## how
 The project is based on hexagonal architecture but it may be flawed and I'm 
-happy to make changes if you find something to improve. The entrypoints folder* 
+happy to make changes if you find something to improve. The entrypoints folder 
 has a pretty obvious name and it's where the bot is. Together with the bot I'm
 puttings some important endpoints of Telegram Bots API to easily call from a 
 Swagger page.
@@ -30,5 +30,11 @@ purposes.
 The scraper project does the hard work and has retry capabilities by using 
 Polly.
 
+## small blog
+Taking advantage of git I can use this file to write and overwrite small 
+annotations without ever losing content! So here we go:
 
-* this folder is virtual and is declared on the solution file
+- The next step is going to be to remove duplicates from the notifications and 
+also send the product link. Without this the notification is pretty much 
+useless because you have to keep the page open to check for more info. That's 
+it!

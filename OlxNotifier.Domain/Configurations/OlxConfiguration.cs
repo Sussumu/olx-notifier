@@ -9,6 +9,7 @@ namespace OlxNotifier.Domain.Configurations
         private string titleRegex;
         private string priceRegex;
         private string dateRegex;
+        private string urlRegex;
 
         public string Url
         {
@@ -67,6 +68,18 @@ namespace OlxNotifier.Domain.Configurations
                     throw new ArgumentException("Date regex cannot be empty! Set a regex that is able to filter just the date of the whole entry here.");
 
                 dateRegex = value;
+            }
+        }
+
+        public string UrlRegex
+        {
+            get => urlRegex;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                    throw new ArgumentException("Url regex cannot be empty! Set a regex that is able to filter just the url of the whole entry here.");
+
+                urlRegex = value;
             }
         }
     }
