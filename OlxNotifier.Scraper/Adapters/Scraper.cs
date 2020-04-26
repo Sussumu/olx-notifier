@@ -1,7 +1,9 @@
 ﻿using AngleSharp;
+using AngleSharp.Dom;
 using OlxNotifier.Domain.Configurations;
 using OlxNotifier.Domain.Models;
 using OlxNotifier.Domain.Ports;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -13,9 +15,19 @@ namespace OlxNotifier.Scraper.Adapters
     {
         public OlxConfiguration Config { get; }
 
+        private readonly Regex titleRegex;
+        private readonly Regex priceRegex;
+        private readonly Regex dateRegex;
+        private readonly Regex urlRegex;
+
         public Scraper(OlxConfiguration config)
         {
             Config = config ?? throw new System.ArgumentNullException(nameof(config));
+
+            titleRegex = new Regex(Config.TitleRegex);
+            priceRegex = new Regex(Config.PriceRegex);
+            dateRegex = new Regex(Config.DateRegex);
+            urlRegex = new Regex(Config.UrlRegex);
         }
 
         public async Task<List<Entry>> GetEntries()
@@ -29,22 +41,40 @@ namespace OlxNotifier.Scraper.Adapters
             var cellSelector = Config.EntriesClassName;
             var cells = document.QuerySelectorAll(cellSelector);
 
-            var titleRegex = new Regex(Config.TitleRegex);
-            var priceRegex = new Regex(Config.PriceRegex);
-            var dateRegex = new Regex(Config.DateRegex);
-            var urlRegex = new Regex(Config.UrlRegex);
-
             return cells
                 .Where(x => x.TextContent.Length > 0)
-                .Select(x => new Entry
-                {
-                    Title = titleRegex.Match(x.TextContent).Value.Substring(1, x.TextContent.Length - 1),
-                    Price = priceRegex.Match(x.TextContent).Value,
-                    Date = dateRegex.Match(x.TextContent).Groups[1].Value,
-                    Time = dateRegex.Match(x.TextContent).Groups[2].Value,
-                    Url = urlRegex.Match(x.InnerHtml).Groups[0].Value
-                })
+                .Select(GetEntry)
                 .ToList();
+        }
+
+        private Entry GetEntry(IElement x)
+        {
+            return new Entry
+            {
+                Title = TryMatch(titleRegex, x.TextContent),//.Substring(1, x.TextContent.Length - 1),
+                Price = TryMatch(priceRegex, x.TextContent),
+                Date = TryMatch(dateRegex, x.TextContent, 1),
+                Time = TryMatch(dateRegex, x.TextContent, 2),
+                Url = TryMatch(urlRegex, x.InnerHtml),
+            };
+        }
+
+        private string TryMatch(Regex regex, string text, int? group = null)
+        {
+            try
+            {
+                var match = regex.Match(text);
+
+                if (group is null)
+                    return match.Value;
+
+                return match.Groups[group.Value].Value;
+            }
+            catch (Exception ex)
+            {
+
+                return string.Empty;
+            }
         }
     }
 }

@@ -1,7 +1,9 @@
-﻿using OlxNotifier.Domain.Ports;
+﻿using OlxNotifier.Domain.Models;
+using OlxNotifier.Domain.Ports;
 using OlxNotifier.TelegramBot.Clients;
 using OlxNotifier.TelegramBot.Contracts;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -22,19 +24,12 @@ namespace OlxNotifier.Console.Services
         public async Task Run()
         {
             var oldRequestResult = await Scraper.GetEntries();
-            var newRequestResult = oldRequestResult;
 
             do
             {
-                Thread.Sleep(10000);
+                var newRequestResult = await Scraper.GetEntries();
 
-                newRequestResult = await Scraper.GetEntries();
-
-                var oldEntries = oldRequestResult.Select(o => o.Time);
-
-                var newEntries = newRequestResult
-                    .Where(n => oldEntries.Contains(n.Time) == false)
-                    .ToList();
+                var newEntries = GetNewEntries(oldRequestResult, newRequestResult);
 
                 foreach (var entry in newEntries)
                 {
@@ -45,9 +40,24 @@ namespace OlxNotifier.Console.Services
                         });
                 }
 
-                oldRequestResult = await Scraper.GetEntries();
+                oldRequestResult = newRequestResult;
+
+                Thread.Sleep(10000);
             }
             while (true);
+        }
+
+        private static List<Entry> GetNewEntries(List<Entry> oldRequestResult, List<Entry> newRequestResult)
+        {
+            var oldEntries = oldRequestResult.Select(o => o.Url);
+
+            var newEntries = newRequestResult
+                .Where(n => oldEntries.Contains(n.Url) == false)
+                .ToList();
+
+            System.Console.WriteLine($"{newEntries.Count} new entries found!");
+
+            return newEntries;
         }
     }
 }
